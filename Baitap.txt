@@ -1,0 +1,34 @@
+/**
+ * 1. Tạo collection user với các thông tin sau: 
+ *      email, password, name, posts, friends, receiveRequests, sendRequests, 
+ * 
+ * 2. Tạo collection post với các thông tin sau:
+ *      author, content, likes, comments
+ * 
+ * 3. Tạo collection comment với các thông tin sau: 
+ *      author, post, content, likes
+ * 
+ * 4. Thực hiện các yêu cầu bên dưới:
+ *      4.1 Thêm ít nhất 3 account vào collection user, 
+ *      4.2 Thêm ít nhất 3 bài post cho các user trên 
+ *      4.3 Thêm ít nhất 3 comment cho các bài post trên 
+ * 
+ *
+ *      4.4 Dùng tài khoản manager@gmail.com like bài post có id 5c9f2980735e5c14d7b657c4
+
+ *      4.5 Dùng tài khoản manager@gmail.com dislike bài post có id 5c9f2980735e5c14d7b657c4
+
+ *      4.6 Dùng tài khoản user manager@gmail.com gửi yêu cầu kết bạn đến  tài khoản guest@gmail.com 
+ *      4.7 Account guest@gmail.com accept yêu cầu kết bạn của acc manager@gmail.com
+ *      4.8 Account guest@gmail.com huỷ yêu cầu kết bạn của acc manager@gmail.com
+ 
+ *      4.9 Liệt kê các bài đăng của user có email 'manager@gmail.com'
+ *      4.10 Cho biết user có email 'manager@gmail.com' có tất cả bao nhiên bạn bè
+ *      4.11 Liệt kê các yêu cầu kết bạn đã nhận của user manager@gmail.com
+ *      4.12 Cho biết bài đăng với id .... có bao nhiêu lượt like, cho biết tên người tạo,
+ *          liệt kê các comment của bài đăng đó, 
+ *          cho biết tên của user đã comment
+ *      4.13 Cho biết comment đầu tiên trên bài post có id ... của user manager@gmail.com có bao nhiêu lượt like
+ *      4.14 Cập nhật lại nội dung bài đăng có id ...
+ *      4.15 Xoá bài đăng có ít hơn 5 lượt like
+ * */
