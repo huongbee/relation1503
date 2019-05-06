@@ -6,7 +6,7 @@
  *      author, content, likes, comments
  * 
  * 3. Tạo collection comment với các thông tin sau: 
- *      author, post, content, likes
+ *      author, post, content, likes, replies
  * 
  * 4. Thực hiện các yêu cầu bên dưới:
  *      4.1 Thêm ít nhất 3 account vào collection user, 
