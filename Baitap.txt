@@ -14,9 +14,9 @@
  *      4.3 Thêm ít nhất 3 comment cho các bài post trên 
  * 
  *
- *      4.4 Dùng tài khoản manager@gmail.com like bài post có id 5c9f2980735e5c14d7b657c4
+ *      4.4 Dùng tài khoản manager@gmail.com like bài post có id 5cd02834e608ba1fdbc4386e
 
- *      4.5 Dùng tài khoản manager@gmail.com dislike bài post có id 5c9f2980735e5c14d7b657c4
+ *      4.5 Dùng tài khoản manager@gmail.com dislike bài post có id 5cd02834e608ba1fdbc4386e
 
  *      4.6 Dùng tài khoản user manager@gmail.com gửi yêu cầu kết bạn đến  tài khoản guest@gmail.com 
  *      4.7 Account guest@gmail.com accept yêu cầu kết bạn của acc manager@gmail.com
