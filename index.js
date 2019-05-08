@@ -4,31 +4,62 @@ const { PostModel } = require('./model/Post');
 const { CommentModel } = require('./model/Comment');
 const { hash } = require('./lib/bcrypt')
 
-// 4.6
-UserModel.findOne({
-    email: 'guest@gmail.com',
+//4,7
+UserModel.findOne({email:'manager@gmail.com'})
+.then(sender=>{
+    if(!sender) return new Error('Cannot find sender!')
+    return UserModel.findOneAndUpdate({
+        email: 'guest@gmail.com',
+    },{
+        $pull: {
+            receiveRequests: sender._id
+        },
+        $addToSet:{
+            friends: sender._id
+        }
+    })
 })
 .then(receiver=>{
     if(!receiver) return new Error('Cannot find receiver!')
-    // update sender
     return UserModel.findOneAndUpdate({
         email: 'manager@gmail.com'
     },{
-        $addToSet:{
+        $pull: {
             sendRequests: receiver._id
-        }
-    }, {new: true})
-})
-.then(sender=>{
-    if(!sender) return new Error('Cannot find sender!')
-    return UserModel.findOneAndUpdate({email: 'guest@gmail.com'},{
+        },
         $addToSet: {
-            receiveRequests: sender._id
+            friends: receiver._id
         }
-    },{ new: true})
+    },{new:true})
 })
-.then(receiver=>console.log(receiver))
+.then(friend=>console.log(friend))
 .catch(err=>console.log({Error: err.message}))
+
+// 4.6
+// UserModel.findOne({
+//     email: 'guest@gmail.com',
+// })
+// .then(receiver=>{
+//     if(!receiver) return new Error('Cannot find receiver!')
+//     // update sender
+//     return UserModel.findOneAndUpdate({
+//         email: 'manager@gmail.com'
+//     },{
+//         $addToSet:{
+//             sendRequests: receiver._id
+//         }
+//     }, {new: true})
+// })
+// .then(sender=>{
+//     if(!sender) return new Error('Cannot find sender!')
+//     return UserModel.findOneAndUpdate({email: 'guest@gmail.com'},{
+//         $addToSet: {
+//             receiveRequests: sender._id
+//         }
+//     },{ new: true})
+// })
+// .then(receiver=>console.log(receiver))
+// .catch(err=>console.log({Error: err.message}))
 
 
 // UserModel.findOne({email: 'manager@gmail.com'})
