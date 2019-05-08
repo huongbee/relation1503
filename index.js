@@ -4,36 +4,61 @@ const { PostModel } = require('./model/Post');
 const { CommentModel } = require('./model/Comment');
 const { hash } = require('./lib/bcrypt')
 
-//4,7
-UserModel.findOne({email:'manager@gmail.com'})
-.then(sender=>{
-    if(!sender) return new Error('Cannot find sender!')
-    return UserModel.findOneAndUpdate({
-        email: 'guest@gmail.com',
-    },{
-        $pull: {
-            receiveRequests: sender._id
-        },
-        $addToSet:{
-            friends: sender._id
-        }
-    })
+// 4.9
+//c2
+//https://mongoosejs.com/docs/populate.html
+UserModel.findOne({
+    email: 'admin@gmail.com'
 })
-.then(receiver=>{
-    if(!receiver) return new Error('Cannot find receiver!')
-    return UserModel.findOneAndUpdate({
-        email: 'manager@gmail.com'
-    },{
-        $pull: {
-            sendRequests: receiver._id
-        },
-        $addToSet: {
-            friends: receiver._id
-        }
-    },{new:true})
-})
-.then(friend=>console.log(friend))
+.populate('posts',{ content: 1, _id: 0})
+.then(user=>console.log(user))
 .catch(err=>console.log({Error: err.message}))
+
+
+// c1
+// UserModel.findOne({
+//     email: 'admin@gmail.com'
+// })
+// .then(user=>{
+//     if(!user) return Error('Cannot find user')
+//     return PostModel.find({
+//         author: user._id
+//     })
+// })
+// .then(posts=>console.log(posts))
+// .catch(err=>console.log({Error: err.message}))
+
+
+//4,7
+// UserModel.findOne({email:'manager@gmail.com'})
+// .then(sender=>{
+//     if(!sender) return new Error('Cannot find sender!')
+//     return UserModel.findOneAndUpdate({
+//         email: 'guest@gmail.com',
+//     },{
+//         $pull: {
+//             receiveRequests: sender._id
+//         },
+//         $addToSet:{
+//             friends: sender._id
+//         }
+//     })
+// })
+// .then(receiver=>{
+//     if(!receiver) return new Error('Cannot find receiver!')
+//     return UserModel.findOneAndUpdate({
+//         email: 'manager@gmail.com'
+//     },{
+//         $pull: {
+//             sendRequests: receiver._id
+//         },
+//         $addToSet: {
+//             friends: receiver._id
+//         }
+//     },{new:true})
+// })
+// .then(friend=>console.log(friend))
+// .catch(err=>console.log({Error: err.message}))
 
 // 4.6
 // UserModel.findOne({
