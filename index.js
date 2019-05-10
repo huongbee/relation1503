@@ -4,15 +4,50 @@ const { PostModel } = require('./model/Post');
 const { CommentModel } = require('./model/Comment');
 const { hash } = require('./lib/bcrypt')
 
-//4.11
-UserModel.findOne({email:'guest@gmail.com'})
+// 4.12
+//5cd02834e608ba1fdbc4386e
+PostModel.findOne({_id: '5cd02834e608ba1fdbc4386e'})
 .populate({
-    path: 'receiveRequests',
-    select: 'name email password'
+    path:'likes',
+    select: {name: 1, _id:0}
 })
-.select('name email')
-.then(user=>console.log(user))
+.populate({
+    path: 'author',
+    select: 'name email'
+})
+.populate({
+    path:'comments',
+    select:{ content: 1, _id:0},
+    populate: {
+        path: 'author',
+        select: {name: 1, _id:0}
+    }
+})
+.then(post=>{
+    console.log("Post: "+post.content)
+    console.log("Author: "+post.author.name)
+    console.log("Total likes: "+post.likes.length)
+    console.log("Comments: ")
+    post.comments.forEach(comment=>{
+        console.log('- Author:'+comment.author.name)
+        console.log('  Content:'+comment.content)
+    })
+    
+})
 .catch(err=>console.log(err))
+
+
+
+
+//4.11
+// UserModel.findOne({email:'guest@gmail.com'})
+// .populate({
+//     path: 'receiveRequests',
+//     select: 'name email password'
+// })
+// .select('name email')
+// .then(user=>console.log(user))
+// .catch(err=>console.log(err))
 
 
 // 4.9
