@@ -4,15 +4,26 @@ const { PostModel } = require('./model/Post');
 const { CommentModel } = require('./model/Comment');
 const { hash } = require('./lib/bcrypt')
 
+//4.11
+UserModel.findOne({email:'guest@gmail.com'})
+.populate({
+    path: 'receiveRequests',
+    select: 'name email password'
+})
+.select('name email')
+.then(user=>console.log(user))
+.catch(err=>console.log(err))
+
+
 // 4.9
 //c2
 //https://mongoosejs.com/docs/populate.html
-UserModel.findOne({
-    email: 'admin@gmail.com'
-})
-.populate('posts',{ content: 1, _id: 0})
-.then(user=>console.log(user))
-.catch(err=>console.log({Error: err.message}))
+// UserModel.findOne({
+//     email: 'admin@gmail.com'
+// })
+// .populate('posts',{ content: 1, _id: 0})
+// .then(user=>console.log(user))
+// .catch(err=>console.log({Error: err.message}))
 
 
 // c1
@@ -68,7 +79,7 @@ UserModel.findOne({
 //     if(!receiver) return new Error('Cannot find receiver!')
 //     // update sender
 //     return UserModel.findOneAndUpdate({
-//         email: 'manager@gmail.com'
+//         email: 'admin@gmail.com'
 //     },{
 //         $addToSet:{
 //             sendRequests: receiver._id
