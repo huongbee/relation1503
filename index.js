@@ -4,37 +4,68 @@ const { PostModel } = require('./model/Post');
 const { CommentModel } = require('./model/Comment');
 const { hash } = require('./lib/bcrypt')
 
-// 4.12
-//5cd02834e608ba1fdbc4386e
-PostModel.findOne({_id: '5cd02834e608ba1fdbc4386e'})
-.populate({
-    path:'likes',
-    select: {name: 1, _id:0}
-})
-.populate({
-    path: 'author',
-    select: 'name email'
-})
-.populate({
-    path:'comments',
-    select:{ content: 1, _id:0},
-    populate: {
-        path: 'author',
-        select: {name: 1, _id:0}
+UserModel.find({
+    name: {
+        $regex: /^admin/i
     }
 })
-.then(post=>{
-    console.log("Post: "+post.content)
-    console.log("Author: "+post.author.name)
-    console.log("Total likes: "+post.likes.length)
-    console.log("Comments: ")
-    post.comments.forEach(comment=>{
-        console.log('- Author:'+comment.author.name)
-        console.log('  Content:'+comment.content)
-    })
-    
-})
+.then(user=>console.log(user))
 .catch(err=>console.log(err))
+
+
+
+//4.13
+// PostModel.findOne({
+//     _id: '5cd02834e608ba1fdbc4386e',
+// })
+// .populate({
+//     path: 'author',
+//     select: {name: 1, _id:0},
+//     match: {
+//         email: 'manager@gmail.com'
+//     }
+// })
+// .populate({
+//     path:'comments',
+//     select:{ content: 1, likes: 1, _id:0},
+// })
+// .then(post=>{
+//     console.log(post)
+//     console.log(post.comments[0].likes.length)
+// })
+// .catch(err=>console.log(err))
+
+// 4.12
+//5cd02834e608ba1fdbc4386e
+// PostModel.findOne({_id: '5cd02834e608ba1fdbc4386e'})
+// .populate({
+//     path:'likes',
+//     select: {name: 1, _id:0}
+// })
+// .populate({
+//     path: 'author',
+//     select: 'name email'
+// })
+// .populate({
+//     path:'comments',
+//     select:{ content: 1, _id:0},
+//     populate: {
+//         path: 'author',
+//         select: {name: 1, _id:0}
+//     }
+// })
+// .then(post=>{
+//     console.log("Post: "+post.content)
+//     console.log("Author: "+post.author.name)
+//     console.log("Total likes: "+post.likes.length)
+//     console.log("Comments: ")
+//     post.comments.forEach(comment=>{
+//         console.log('- Author:'+comment.author.name)
+//         console.log('  Content:'+comment.content)
+//     })
+    
+// })
+// .catch(err=>console.log(err))
 
 
 
@@ -203,9 +234,9 @@ PostModel.findOne({_id: '5cd02834e608ba1fdbc4386e'})
 // hash('111111')
 // .then(passwordHash=>{
 //     return UserModel.create({
-//         email: 'guest@gmail.com',
+//         email: 'admin02@gmail.com',
 //         password: passwordHash,
-//         name: 'Guest'
+//         name: 'Nguyen Admin'
 //     })
 // })
 // .then(user=>console.log(user))
