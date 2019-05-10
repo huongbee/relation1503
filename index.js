@@ -4,6 +4,7 @@ const { PostModel } = require('./model/Post');
 const { CommentModel } = require('./model/Comment');
 const { hash } = require('./lib/bcrypt')
 
+// like 'admin%' i: upper and lower
 UserModel.find({
     name: {
         $regex: /^admin/i
